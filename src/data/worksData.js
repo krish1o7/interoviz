@@ -8,6 +8,7 @@ export const PRIMARY_CATEGORIES = [
   "Exterior",
   "Interior",
   "Virtual Reality",
+  "Panoramic 3D View",
   "Furniture",
 ];
 
@@ -392,11 +393,11 @@ export const WORKS_ITEMS = [
   // ── All 120 Bespoke Furniture & Joinery Works ──
   ...furnitureItems,
 
-  // ── Virtual Reality & Spatial 3D ──
+  // ── Panoramic 3D View & Spherical VR ──
   {
     id: "nippon-steel-360-vr",
     title: "Nippon Steel Executive Atrium (Live 360° 3D VR)",
-    category: "Virtual Reality",
+    category: "Panoramic 3D View",
     subCategory: "Commercial",
     image: "/images/gallery/nippon-steel-360-vr.jpg",
     panoramaUrl: "/images/gallery/nippon-steel-360-vr.jpg",
