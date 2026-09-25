@@ -247,34 +247,24 @@ export default function WorksPage({ lenisRef }) {
               </div>
 
               <div className="works-lightbox__header-right">
-                {(activeItem.is3D || activeItem.isPanorama) && (
+                {activeItem.is3D && !activeItem.isPanorama && (
                   <>
                     <button
                       className={"lightbox-btn" + (modalAutoRotate ? " is-active" : "")}
                       onClick={() => setModalAutoRotate(!modalAutoRotate)}
-                      title="Toggle Turntable / 360° Auto-Pan"
+                      title="Toggle Turntable"
                     >
-                      <span>
-                        {modalAutoRotate
-                          ? activeItem.isPanorama
-                            ? "360° Pan Active"
-                            : "Turntable Active"
-                          : activeItem.isPanorama
-                            ? "360° Auto-Pan"
-                            : "Turntable"}
-                      </span>
+                      <span>{modalAutoRotate ? "Turntable Active" : "Turntable"}</span>
                     </button>
-                    {!activeItem.isPanorama && (
-                      <button
-                        className="lightbox-btn"
-                        onClick={() =>
-                          setModalLighting((prev) => (prev === "neutral" ? "legacy" : "neutral"))
-                        }
-                        title="Toggle Lighting"
-                      >
-                        <span>Lighting</span>
-                      </button>
-                    )}
+                    <button
+                      className="lightbox-btn"
+                      onClick={() =>
+                        setModalLighting((prev) => (prev === "neutral" ? "legacy" : "neutral"))
+                      }
+                      title="Toggle Lighting"
+                    >
+                      <span>Lighting</span>
+                    </button>
                   </>
                 )}
 
