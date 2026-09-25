@@ -8,8 +8,8 @@ export default function WorksPage({ lenisRef }) {
   const [selectedPrimary, setSelectedPrimary] = useState("Interior");
   const [selectedSub, setSelectedSub] = useState("Hospitality");
   const [activeItem, setActiveItem] = useState(null);
-  const [modalAutoRotate, setModalAutoRotate] = useState(true);
-  const [modalLighting, setModalLighting] = useState("neutral");
+  const modalAutoRotate = true;
+  const modalLighting = "neutral";
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -275,27 +275,6 @@ export default function WorksPage({ lenisRef }) {
               </div>
 
               <div className="works-lightbox__header-right">
-                {activeItem.is3D && !activeItem.isPanorama && (
-                  <>
-                    <button
-                      className={"lightbox-btn" + (modalAutoRotate ? " is-active" : "")}
-                      onClick={() => setModalAutoRotate(!modalAutoRotate)}
-                      title="Toggle Turntable"
-                    >
-                      <span>{modalAutoRotate ? "Turntable Active" : "Turntable"}</span>
-                    </button>
-                    <button
-                      className="lightbox-btn"
-                      onClick={() =>
-                        setModalLighting((prev) => (prev === "neutral" ? "legacy" : "neutral"))
-                      }
-                      title="Toggle Lighting"
-                    >
-                      <span>Lighting</span>
-                    </button>
-                  </>
-                )}
-
                 <button
                   className="works-lightbox__close"
                   onClick={() => setActiveItem(null)}

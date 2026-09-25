@@ -78,8 +78,8 @@ export default function ChairConfiguratorStudio({
   const [selectedWood, setSelectedWood] = useState(WOOD_SPECIES[1]); // Mahogany
   const [selectedStain, setSelectedStain] = useState(WOOD_STAINS[1]); // Ember
   const [selectedFabric, setSelectedFabric] = useState(FABRICS[0]); // Himalaya 907
-  const [autoRotate, setAutoRotate] = useState(true);
-  const [lighting, setLighting] = useState("neutral");
+  const autoRotate = true;
+  const lighting = "neutral";
   const [isLoaded, setIsLoaded] = useState(false);
 
   // Apply PBR material colors to the model
@@ -154,22 +154,6 @@ export default function ChairConfiguratorStudio({
           </div>
 
           <div className="chair-studio__header-actions">
-            <button
-              className={`chair-studio-header-btn ${autoRotate ? "is-active" : ""}`}
-              onClick={() => setAutoRotate(!autoRotate)}
-              title="Toggle Auto-Rotate Turntable"
-            >
-              <span>{autoRotate ? "Turntable Active" : "Turntable"}</span>
-            </button>
-            <button
-              className="chair-studio-header-btn"
-              onClick={() =>
-                setLighting((prev) => (prev === "neutral" ? "legacy" : "neutral"))
-              }
-              title="Toggle Studio Lighting"
-            >
-              <span>Lighting: {lighting === "neutral" ? "Studio" : "Warm"}</span>
-            </button>
             <button
               className="chair-studio__close-btn"
               onClick={onClose}
