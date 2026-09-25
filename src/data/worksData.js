@@ -396,7 +396,7 @@ export const WORKS_ITEMS = [
   // ── Panoramic 3D View & Spherical VR ──
   {
     id: "nippon-steel-360-vr",
-    title: "Nippon Steel Executive Atrium (Live 360° 3D VR)",
+    title: "Nippon Steel Executive Atrium ",
     category: "Panoramic 3D View",
     subCategory: "Commercial",
     image: "/images/gallery/nippon-steel-360-vr.jpg",
@@ -410,7 +410,7 @@ export const WORKS_ITEMS = [
   },
   {
     id: "vr-archer-spatial",
-    title: "Archer 3D Spatial Form Study",
+    title: "STUDY CHAIR",
     category: "Virtual Reality",
     subCategory: "Commercial",
     image: highburyGroove,

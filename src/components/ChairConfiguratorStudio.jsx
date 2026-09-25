@@ -146,7 +146,6 @@ export default function ChairConfiguratorStudio({
         {/* Top Header */}
         <div className="chair-studio__header">
           <div className="chair-studio__header-left">
-            <span className="chair-studio__tag">Interactive 3D Configurator</span>
             <h2 className="chair-studio__title">{item.title}</h2>
             <span className="chair-studio__location">
               {item.client} — {item.location}
@@ -320,12 +319,12 @@ export default function ChairConfiguratorStudio({
               </div>
 
               {/* Real-time Material Spec pill */}
-              <div className="chair-active-spec">
+              {/* <div className="chair-active-spec">
                 <span className="chair-spec-dot" />
                 <span>
                   Live PBR Shading: <strong>{selectedWood.name} ({selectedStain.name})</strong> + <strong>{selectedFabric.name}</strong>
                 </span>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

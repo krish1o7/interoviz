@@ -265,9 +265,6 @@ export default function WorksPage({ lenisRef }) {
             {/* Top Bar */}
             <div className="works-lightbox__header">
               <div className="works-lightbox__header-left">
-                <span className="works-lightbox__brand-tag">
-                  {activeItem.category} • {activeItem.subCategory}
-                </span>
                 <h3 className="works-lightbox__title">{activeItem.title}</h3>
                 <span className="works-lightbox__location">
                   {activeItem.location} ({activeItem.year})
