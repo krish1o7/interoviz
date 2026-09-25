@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { PRIMARY_CATEGORIES, SUB_CATEGORIES, WORKS_ITEMS } from "../data/worksData";
+import Panorama360Viewer from "../components/Panorama360Viewer";
 
 export default function WorksPage({ lenisRef }) {
   // Matching initial state to user screenshot: "Interior" + "Hospitality"
@@ -18,7 +19,8 @@ export default function WorksPage({ lenisRef }) {
     return WORKS_ITEMS.filter((item) => {
       const matchPrimary =
         selectedPrimary === "All" ||
-        item.category.toLowerCase() === selectedPrimary.toLowerCase();
+        item.category.toLowerCase() === selectedPrimary.toLowerCase() ||
+        (selectedPrimary.toLowerCase() === "interior" && item.isPanorama);
 
       // Subcategory ONLY applies when "Interior" is selected
       if (selectedPrimary.toLowerCase() === "interior") {
@@ -135,16 +137,29 @@ export default function WorksPage({ lenisRef }) {
         <div className="works-grid-container">
           <div className="interoviz-masonry-grid">
             {displayWorks.map((item, index) => {
-              const is3D = Boolean(item.is3D && item.modelUrl);
+              const isPanorama = Boolean(item.isPanorama && item.panoramaUrl);
+              const is3DModel = Boolean(item.is3D && item.modelUrl && !isPanorama);
+              const isInteractive = isPanorama || is3DModel;
 
               return (
                 <article
                   key={item.id}
-                  className={"interoviz-gallery-card" + (is3D ? " is-3d-card" : "")}
-                  onClick={() => !is3D && setActiveItem(item)}
+                  className={"interoviz-gallery-card" + (isInteractive ? " is-3d-card" : "")}
+                  onClick={() => !isInteractive && setActiveItem(item)}
                 >
                   <div className="interoviz-gallery-card__media">
-                    {is3D ? (
+                    {isPanorama ? (
+                      <div className="interoviz-card-3d-stage">
+                        <Panorama360Viewer
+                          src={item.panoramaUrl}
+                          alt={item.title}
+                          autoRotate={true}
+                          allowZoom={false}
+                          showControls={true}
+                          onExpand={() => setActiveItem(item)}
+                        />
+                      </div>
+                    ) : is3DModel ? (
                       <div className="interoviz-card-3d-stage">
                         <model-viewer
                           src={item.modelUrl}
@@ -166,7 +181,6 @@ export default function WorksPage({ lenisRef }) {
                           </div>
                         </model-viewer>
                       </div>
-
                     ) : (
                       <>
                         <img
@@ -229,24 +243,34 @@ export default function WorksPage({ lenisRef }) {
               </div>
 
               <div className="works-lightbox__header-right">
-                {activeItem.is3D && (
+                {(activeItem.is3D || activeItem.isPanorama) && (
                   <>
                     <button
                       className={"lightbox-btn" + (modalAutoRotate ? " is-active" : "")}
                       onClick={() => setModalAutoRotate(!modalAutoRotate)}
-                      title="Toggle Turntable"
+                      title="Toggle Turntable / 360° Auto-Pan"
                     >
-                      <span>{modalAutoRotate ? "Turntable Active" : "Turntable"}</span>
+                      <span>
+                        {modalAutoRotate
+                          ? activeItem.isPanorama
+                            ? "360° Pan Active"
+                            : "Turntable Active"
+                          : activeItem.isPanorama
+                            ? "360° Auto-Pan"
+                            : "Turntable"}
+                      </span>
                     </button>
-                    <button
-                      className="lightbox-btn"
-                      onClick={() =>
-                        setModalLighting((prev) => (prev === "neutral" ? "legacy" : "neutral"))
-                      }
-                      title="Toggle Lighting"
-                    >
-                      <span>Lighting</span>
-                    </button>
+                    {!activeItem.isPanorama && (
+                      <button
+                        className="lightbox-btn"
+                        onClick={() =>
+                          setModalLighting((prev) => (prev === "neutral" ? "legacy" : "neutral"))
+                        }
+                        title="Toggle Lighting"
+                      >
+                        <span>Lighting</span>
+                      </button>
+                    )}
                   </>
                 )}
 
@@ -265,7 +289,16 @@ export default function WorksPage({ lenisRef }) {
 
             {/* Lightbox Content Stage */}
             <div className="works-lightbox__stage">
-              {activeItem.is3D ? (
+              {activeItem.isPanorama ? (
+                <Panorama360Viewer
+                  src={activeItem.panoramaUrl}
+                  alt={activeItem.title}
+                  autoRotate={modalAutoRotate}
+                  allowZoom={true}
+                  showControls={true}
+                  className="works-lightbox__panorama-viewer"
+                />
+              ) : activeItem.is3D && activeItem.modelUrl ? (
                 <model-viewer
                   src={activeItem.modelUrl}
                   alt={activeItem.title}

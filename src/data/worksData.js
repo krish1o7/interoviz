@@ -392,6 +392,21 @@ export const WORKS_ITEMS = [
   // ── All 120 Bespoke Furniture & Joinery Works ──
   ...furnitureItems,
 
+  // ── Virtual Reality & Spatial 3D ──
+  {
+    id: "nippon-steel-360-vr",
+    title: "Nippon Steel Executive Atrium (Live 360° 3D VR)",
+    category: "Virtual Reality",
+    subCategory: "Commercial",
+    image: "/images/gallery/nippon-steel-360-vr.jpg",
+    panoramaUrl: "/images/gallery/nippon-steel-360-vr.jpg",
+    is3D: true,
+    isPanorama: true,
+    client: "Nippon Steel Corporation",
+    location: "Tokyo, Japan",
+    year: "2026",
+    description: "Immersive 360° interactive spatial visualization of Nippon Steel's flagship reception atrium, featuring architectural timber gridshell vaulted ceilings, terrazzo island counters, and executive lounge zones.",
+  },
   {
     id: "vr-archer-spatial",
     title: "Archer 3D Spatial Form Study",
