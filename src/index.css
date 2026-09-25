@@ -191,60 +191,102 @@ img, video {
 }
 
 .navbar__logo {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
   cursor: pointer;
   z-index: 10001;
+  text-decoration: none;
+  padding: 4px 0;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-.navbar__logo-img {
+.navbar__logo-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
   height: 32px;
-  width: auto;
-  max-width: 190px;
-  display: block;
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  width: 56px;
+  overflow: hidden;
+  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: width;
 }
 
-.navbar__logo:hover .navbar__logo-img {
-  opacity: 0.88;
-  transform: scale(1.02);
+/* Hover or keyboard focus: smoothly expand width to reveal whole logo name */
+.navbar__logo:hover .navbar__logo-wrap,
+.navbar__logo:focus-visible .navbar__logo-wrap,
+.navbar__logo-wrap.is-hovered {
+  width: 175px;
+}
+
+/* ── 1. Compact IV Logo (Default) ── */
+.navbar__logo-iv {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 32px;
+  width: 56px;
+  object-fit: contain;
+  object-position: left center;
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.navbar__logo:hover .navbar__logo-iv,
+.navbar__logo:focus-visible .navbar__logo-iv,
+.navbar__logo-wrap.is-hovered .navbar__logo-iv {
+  opacity: 0;
+  transform: translateX(-16px) scale(0.88);
+}
+
+/* ── 2. Full Expanded Logo (INTEROVIZ DEFINING TOMORROW) ── */
+.navbar__logo-full {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 32px;
+  width: 175px;
+  max-width: none;
+  object-fit: contain;
+  object-position: left center;
+  opacity: 0;
+  transform: translateX(18px);
+  clip-path: inset(0 100% 0 0);
+  transition: opacity 0.38s cubic-bezier(0.16, 1, 0.3, 1) 0.04s,
+              transform 0.48s cubic-bezier(0.16, 1, 0.3, 1) 0.04s,
+              clip-path 0.48s cubic-bezier(0.16, 1, 0.3, 1) 0.04s;
+  pointer-events: none;
+}
+
+.navbar__logo:hover .navbar__logo-full,
+.navbar__logo:focus-visible .navbar__logo-full,
+.navbar__logo-wrap.is-hovered .navbar__logo-full {
+  opacity: 1;
+  transform: translateX(0);
+  clip-path: inset(0 0% 0 0);
 }
 
 @media (max-width: 600px) {
-  .navbar__logo-img {
+  .navbar__logo-wrap {
     height: 26px;
-    max-width: 150px;
+    width: 46px;
   }
-}
-
-.navbar__logo-icon {
-  width: 32px;
-  height: 32px;
-  position: relative;
-  overflow: hidden;
-}
-
-.navbar__logo-icon svg {
-  width: 100%;
-  height: 100%;
-}
-
-.navbar__logo-text {
-  display: flex;
-  overflow: hidden;
-  height: 1.3rem;
-}
-
-.navbar__logo-letter {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 1.1rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  display: inline-block;
-  transform: translateY(110%);
-  opacity: 0;
+  .navbar__logo:hover .navbar__logo-wrap,
+  .navbar__logo:focus-visible .navbar__logo-wrap,
+  .navbar__logo-wrap.is-hovered {
+    width: 142px;
+  }
+  .navbar__logo-iv {
+    height: 26px;
+    width: 46px;
+  }
+  .navbar__logo-full {
+    height: 26px;
+    width: 142px;
+  }
 }
 
 .navbar__hamburger {

@@ -18,9 +18,6 @@ export default function Navbar({ onNavigate, currentPath = '/' }) {
   const [logoHover, setLogoHover] = useState(false);
   const menuRef = useRef(null);
   const linkRefs = useRef([]);
-  const logoWrapRef = useRef(null);
-  const compactRef = useRef(null);
-  const expandedRef = useRef(null);
 
   // Fill navbar on scroll
   useEffect(() => {
@@ -112,13 +109,27 @@ export default function Navbar({ onNavigate, currentPath = '/' }) {
             e.preventDefault();
             onNavigate?.('/');
           }}
-          style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', textDecoration: 'none' }}
+          onMouseEnter={() => setLogoHover(true)}
+          onMouseLeave={() => setLogoHover(false)}
+          onFocus={() => setLogoHover(true)}
+          onBlur={() => setLogoHover(false)}
+          aria-label="Interoviz - Defining Tomorrow"
+          style={{ cursor: 'pointer', textDecoration: 'none' }}
         >
-          <img
-            src={logoExpanded}
-            alt="Interoviz - Defining Tomorrow"
-            className="navbar__logo-img"
-          />
+          <div className={`navbar__logo-wrap${logoHover ? ' is-hovered' : ''}`}>
+            {/* Compact IV Monogram (Default State) */}
+            <img
+              src={logoCompact}
+              alt="Interoviz IV"
+              className="navbar__logo-iv"
+            />
+            {/* Full Expanded Logo Name (Revealed on Hover) */}
+            <img
+              src={logoExpanded}
+              alt="Interoviz - Defining Tomorrow"
+              className="navbar__logo-full"
+            />
+          </div>
         </a>
 
         <button
