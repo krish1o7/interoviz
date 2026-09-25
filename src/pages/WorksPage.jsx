@@ -134,71 +134,8 @@ export default function WorksPage({ lenisRef }) {
       {/* ── 3-Column Luxury Portfolio Grid ── */}
       <section className="works-grid-section">
         <div className="works-grid-container">
-          {selectedPrimary.toLowerCase() === "panoramic 3d view" ? (
-            <div className="interoviz-panoramic-showcase">
-              <div className="interoviz-panoramic-hero">
-                <div className="interoviz-panoramic-hero__viewer">
-                  <Panorama360Viewer
-                    src="/images/gallery/nippon-steel-360-vr.jpg"
-                    alt="Nippon Steel Executive Atrium 360° Panorama View"
-                    autoRotate={true}
-                    allowZoom={true}
-                    showControls={true}
-                    className="interoviz-panoramic-theater"
-                    onExpand={() =>
-                      setActiveItem(
-                        WORKS_ITEMS.find((w) => w.id === "nippon-steel-360-vr")
-                      )
-                    }
-                  />
-                </div>
-
-                <div className="interoviz-panoramic-hero__info">
-                  <div className="panoramic-info__meta">
-                    <span className="panoramic-info__tag">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ marginRight: 6 }}>
-                        <circle cx="12" cy="12" r="10" />
-                        <path d="M12 2a14.5 14.5 0 0 0 0 20M12 2a14.5 14.5 0 0 1 0 20M2 12h20" />
-                      </svg>
-                      Interactive 360° Spherical VR
-                    </span>
-                    <span className="panoramic-info__specs">
-                      WebGL 60FPS • 360° × 180° Orbit • Equirectangular Projection
-                    </span>
-                  </div>
-                  <h2 className="panoramic-info__title">
-                    Nippon Steel Corporate Headquarters
-                  </h2>
-                  <p className="panoramic-info__subtitle">
-                    Executive Reception Atrium & VIP Hospitality Lounge — Tokyo, Japan
-                  </p>
-                  <p className="panoramic-info__desc">
-                    Immersive 360-degree interactive spatial visualization featuring an architectural timber gridshell vaulted ceiling, curved fluted reception island with terrazzo counter, integrated biophilic living wall, and bespoke executive lounge settings. Drag in any direction to explore the architecture in real time.
-                  </p>
-                  <div className="panoramic-info__actions">
-                    <button
-                      className="panoramic-action-btn"
-                      onClick={() =>
-                        setActiveItem(
-                          WORKS_ITEMS.find((w) => w.id === "nippon-steel-360-vr")
-                        )
-                      }
-                    >
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <polyline points="15 3 21 3 21 9" />
-                        <polyline points="9 21 3 21 3 15" />
-                        <line x1="21" y1="3" x2="14" y2="10" />
-                        <line x1="3" y1="21" x2="10" y2="14" />
-                      </svg>
-                      <span>Inspect Fullscreen Lightbox</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="interoviz-masonry-grid">
-              {displayWorks.map((item, index) => {
+          <div className="interoviz-masonry-grid">
+            {displayWorks.map((item, index) => {
               const isPanorama = Boolean(item.isPanorama && item.panoramaUrl);
               const is3DModel = Boolean(item.is3D && item.modelUrl && !isPanorama);
               const isInteractive = isPanorama || is3DModel;
@@ -220,6 +157,10 @@ export default function WorksPage({ lenisRef }) {
                           showControls={true}
                           onExpand={() => setActiveItem(item)}
                         />
+                        <div className="interoviz-card-3d-caption">
+                          <h4 className="interoviz-card-3d-caption__title">{item.title}</h4>
+                          <p className="interoviz-card-3d-caption__meta">{item.location}</p>
+                        </div>
                       </div>
                     ) : is3DModel ? (
                       <div className="interoviz-card-3d-stage">
@@ -242,6 +183,10 @@ export default function WorksPage({ lenisRef }) {
                             <span>Loading 3D Model...</span>
                           </div>
                         </model-viewer>
+                        <div className="interoviz-card-3d-caption">
+                          <h4 className="interoviz-card-3d-caption__title">{item.title}</h4>
+                          <p className="interoviz-card-3d-caption__meta">{item.location}</p>
+                        </div>
                       </div>
                     ) : (
                       <>
@@ -273,14 +218,10 @@ export default function WorksPage({ lenisRef }) {
                       </>
                     )}
                   </div>
-
                 </article>
-
               );
             })}
-
           </div>
-          )}
         </div>
       </section>
 
