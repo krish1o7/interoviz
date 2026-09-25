@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { PRIMARY_CATEGORIES, SUB_CATEGORIES, WORKS_ITEMS } from "../data/worksData";
 import Panorama360Viewer from "../components/Panorama360Viewer";
+import ChairConfiguratorStudio from "../components/ChairConfiguratorStudio";
 
 export default function WorksPage({ lenisRef }) {
   // Matching initial state to user screenshot: "Interior" + "Hospitality"
@@ -183,6 +184,27 @@ export default function WorksPage({ lenisRef }) {
                             <span>Loading 3D Model...</span>
                           </div>
                         </model-viewer>
+
+                        {/* Top-Right Expandable Button */}
+                        <button
+                          type="button"
+                          className="interoviz-card-3d-expand-btn"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setActiveItem(item);
+                          }}
+                          title="Customize & Expand 3D View"
+                          aria-label="Customize and Expand 3D View"
+                        >
+                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                            <polyline points="15 3 21 3 21 9" />
+                            <polyline points="9 21 3 21 3 15" />
+                            <line x1="21" y1="3" x2="14" y2="10" />
+                            <line x1="3" y1="21" x2="10" y2="14" />
+                          </svg>
+                          <span>Customize & Expand</span>
+                        </button>
+
                         <div className="interoviz-card-3d-caption">
                           <h4 className="interoviz-card-3d-caption__title">{item.title}</h4>
                           <p className="interoviz-card-3d-caption__meta">{item.location}</p>
@@ -225,10 +247,16 @@ export default function WorksPage({ lenisRef }) {
         </div>
       </section>
 
-      {/* ── High-End Lightbox Inspector Modal ── */}
-      {activeItem && (
-        <div className="works-lightbox" onClick={() => setActiveItem(null)}>
-          <div className="works-lightbox__backdrop" />
+      {/* ── High-End Lightbox Inspector Modal / 3D Chair Studio ── */}
+      {activeItem &&
+        (activeItem.modelUrl && activeItem.modelUrl.includes("ArcherArmChair") ? (
+          <ChairConfiguratorStudio
+            item={activeItem}
+            onClose={() => setActiveItem(null)}
+          />
+        ) : (
+          <div className="works-lightbox" onClick={() => setActiveItem(null)}>
+            <div className="works-lightbox__backdrop" />
 
           <div
             className="works-lightbox__dialog"
@@ -355,7 +383,7 @@ export default function WorksPage({ lenisRef }) {
             </div>
           </div>
         </div>
-      )}
+      ))}
     </div>
   );
 }

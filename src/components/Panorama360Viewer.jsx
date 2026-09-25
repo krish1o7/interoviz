@@ -384,26 +384,26 @@ export default function Panorama360Viewer({
         </div>
       )}
 
-      <div className="interoviz-panorama360-badge">
+      {/* <div className="interoviz-panorama360-badge">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <circle cx="12" cy="12" r="10" />
           <path d="M12 2a14.5 14.5 0 0 0 0 20M12 2a14.5 14.5 0 0 1 0 20M2 12h20" />
         </svg>
         <span>360° LIVE VR</span>
-      </div>
+      </div> */}
 
-      {!hasInteracted && isLoaded && (
+      {/* {!hasInteracted && isLoaded && (
         <div className="interoviz-panorama360-prompt">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M7 11V7a5 5 0 0 1 10 0v4M4 11h16a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2z" />
           </svg>
           <span>Drag to orbit 360°</span>
         </div>
-      )}
+      )} */}
 
       {showControls && (
         <div className="interoviz-panorama360-controls" onClick={(e) => e.stopPropagation()}>
-          <button
+          {/* <button
             className={`p360-btn ${autoRotate ? "is-active" : ""}`}
             onClick={() => setAutoRotate(!autoRotate)}
             title={autoRotate ? "Pause 360° Auto-Pan" : "Start 360° Auto-Pan"}
@@ -412,9 +412,9 @@ export default function Panorama360Viewer({
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
             </svg>
-          </button>
+          </button> */}
 
-          {allowZoom && (
+          {/* {allowZoom && (
             <>
               <button className="p360-btn" onClick={zoomIn} title="Zoom In" aria-label="Zoom in">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -428,14 +428,14 @@ export default function Panorama360Viewer({
                 </svg>
               </button>
             </>
-          )}
+          )} */}
 
-          <button className="p360-btn" onClick={resetView} title="Reset View" aria-label="Reset view">
+          {/* <button className="p360-btn" onClick={resetView} title="Reset View" aria-label="Reset view">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <circle cx="12" cy="12" r="3" />
               <path d="M12 2v3M12 19v3M2 12h3M19 12h3" />
             </svg>
-          </button>
+          </button> */}
 
           <button
             className="p360-btn"

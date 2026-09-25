@@ -4362,4 +4362,451 @@ img, video {
   }
 }
 
+/* ── 3D Gallery Card Expandable Button ───────────────────── */
+.interoviz-card-3d-expand-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.interoviz-card-3d-expand-btn:hover {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.25);
+}
+
+/* ── Chair Configurator Studio Modal ─────────────────────── */
+.chair-studio {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.chair-studio__dialog {
+  width: 100%;
+  max-width: 1320px;
+  height: 88vh;
+  max-height: 900px;
+  background: #111111;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+}
+
+.chair-studio__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.1rem 1.75rem;
+  background: #151515;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  gap: 1rem;
+}
+
+.chair-studio__tag {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #00e5a3;
+  margin-bottom: 2px;
+  display: block;
+}
+
+.chair-studio__title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.chair-studio__location {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 2px;
+  display: block;
+}
+
+.chair-studio__header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.chair-studio-header-btn {
+  padding: 0.45rem 1rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--font-heading);
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chair-studio-header-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+}
+
+.chair-studio-header-btn.is-active {
+  background: #c8b89a;
+  border-color: #c8b89a;
+  color: #0a0a0a;
+}
+
+.chair-studio__close-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-left: 0.5rem;
+}
+
+.chair-studio__close-btn:hover {
+  background: #ffffff;
+  color: #000000;
+  transform: rotate(90deg);
+}
+
+.chair-studio__body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.chair-studio__viewport-col {
+  flex: 1.4;
+  min-width: 0;
+  background: radial-gradient(circle at center, #222222 0%, #0d0d0d 100%);
+  position: relative;
+}
+
+.chair-studio__stage {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.chair-studio__model-viewer {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  background: transparent;
+}
+
+.chair-studio__stage-controls {
+  position: absolute;
+  bottom: 16px;
+  left: 18px;
+  right: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.chair-stage-btn {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(10, 10, 10, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.74rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chair-stage-btn:hover {
+  background: #ffffff;
+  color: #000000;
+}
+
+.chair-stage-hint {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.04em;
+  background: rgba(10, 10, 10, 0.6);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.chair-studio__loader {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: #0d0d0d;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+}
+
+/* Right Panel: Editing & Customization */
+.chair-studio__panel-col {
+  flex: 1;
+  max-width: 480px;
+  min-width: 360px;
+  background: #141414;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.chair-studio__panel {
+  padding: 2.2rem 2.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+.chair-panel__narrative {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.68);
+  margin: 0;
+}
+
+.chair-option-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.chair-option-group__label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+}
+
+.chair-option-title {
+  font-weight: 700;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.chair-option-value {
+  color: #c8b89a;
+  font-weight: 600;
+}
+
+.chair-option-sub {
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 400;
+  font-size: 0.76rem;
+}
+
+/* Radio buttons for WOOD */
+.chair-radio-row {
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+}
+
+.chair-radio-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.chair-radio-indicator {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.chair-radio-item.is-selected .chair-radio-indicator {
+  border-color: #00e5a3;
+}
+
+.chair-radio-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00e5a3;
+}
+
+.chair-radio-text {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.chair-radio-item.is-selected .chair-radio-text {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Swatches for WOOD STAIN & FABRIC */
+.chair-swatches-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.chair-swatch-box {
+  width: 38px;
+  height: 38px;
+  border-radius: 4px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12), 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.chair-swatch-box:hover {
+  transform: translateY(-2px);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25), 0 6px 16px rgba(0, 0, 0, 0.5);
+}
+
+.chair-swatch-box.is-active {
+  border-color: #00e5a3;
+  box-shadow: 0 0 0 2px rgba(0, 229, 163, 0.4), 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.chair-swatch-box--fabric {
+  width: 44px;
+  height: 44px;
+}
+
+.chair-swatch-check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.8));
+}
+
+.chair-active-spec {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  line-height: 1.4;
+}
+
+.chair-active-spec strong {
+  color: #00e5a3;
+}
+
+.chair-spec-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00e5a3;
+  box-shadow: 0 0 6px #00e5a3;
+  flex-shrink: 0;
+}
+
+@media (max-width: 960px) {
+  .chair-studio__dialog {
+    height: 92vh;
+  }
+  .chair-studio__body {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  .chair-studio__viewport-col {
+    height: 380px;
+    flex: none;
+  }
+  .chair-studio__panel-col {
+    max-width: 100%;
+    min-width: 0;
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .chair-studio__panel {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .chair-studio {
+    padding: 0.5rem;
+  }
+  .chair-studio__header {
+    padding: 0.9rem 1rem;
+  }
+  .chair-studio__viewport-col {
+    height: 290px;
+  }
+}
+
+
 
