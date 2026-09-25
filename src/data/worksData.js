@@ -376,19 +376,7 @@ export const WORKS_ITEMS = [
   },
 
   // ── Live 3D Architectural / Furniture Items (with direct real-time orbit) ──
-  {
-    id: "archer-armchair-3d",
-    title: "Archer Bespoke Armchair (Live 3D)",
-    category: "Furniture",
-    subCategory: "Hospitality",
-    image: "/images/gallery/interoviz-spa-treatment-suite.png",
-    modelUrl: "/models/ArcherArmChair.glb",
-    is3D: true,
-    client: "Archer Living Studio",
-    location: "Milan, Italy",
-    year: "2026",
-    description: "Sculptural luxury armchair designed with photorealistic PBR fabric weave, ergonomic contours, and real-time 360° interactive orbit.",
-  },
+
 
   // ── All 120 Bespoke Furniture & Joinery Works ──
   ...furnitureItems,
