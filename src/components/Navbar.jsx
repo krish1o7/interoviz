@@ -116,18 +116,21 @@ export default function Navbar({ onNavigate, currentPath = '/' }) {
           aria-label="Interoviz - Defining Tomorrow"
           style={{ cursor: 'pointer', textDecoration: 'none' }}
         >
-          <div className={`navbar__logo-wrap${logoHover ? ' is-hovered' : ''}`}>
-            {/* Compact IV Monogram (Default State) */}
+          {/* IV Monogram in dedicated styled box */}
+          <div className="navbar__logo-box">
             <img
               src={logoCompact}
               alt="Interoviz IV"
-              className="navbar__logo-iv"
+              className="navbar__logo-iv-icon"
             />
-            {/* Full Expanded Logo Name (Revealed on Hover) */}
+          </div>
+
+          {/* Full Brand Name (Emerges from behind the IV box on hover, like Brick Visual) */}
+          <div className={`navbar__logo-text-track${logoHover ? ' is-expanded' : ''}`}>
             <img
               src={logoExpanded}
               alt="Interoviz - Defining Tomorrow"
-              className="navbar__logo-full"
+              className="navbar__logo-text-inner"
             />
           </div>
         </a>

@@ -27,21 +27,13 @@ export default function Hero({ onShowreel }) {
 
   return (
     <section className="hero">
-      {/* ── Video background ── */}
+      {/* ── Video background (Full height 100vh, zero gaps) ── */}
       <video
         autoPlay
         muted
         loop
         playsInline
-        style={{
-          position: 'absolute',
-          inset: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          objectPosition: 'center',
-          zIndex: 0,
-        }}
+        className="hero__video"
       >
         <source src="/hero-video.mp4" type="video/mp4" />
       </video>
