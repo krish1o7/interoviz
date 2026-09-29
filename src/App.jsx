@@ -9,8 +9,6 @@ import WhatSetsUsApart from './components/WhatSetsUsApart';
 import WhatWeDo from './components/WhatWeDo';
 import CaseStudies from './components/CaseStudies';
 import AboutSection from './components/AboutSection';
-import InlineVideo from './components/InlineVideo';
-import CareerAcademy from './components/CareerAcademy';
 import Clients from './components/Clients';
 import Footer from './components/Footer';
 import Cursor from './components/Cursor';
@@ -135,8 +133,6 @@ export default function App() {
             <WhatWeDo />
             <CaseStudies />
             <AboutSection onNavigate={navigate} />
-            <InlineVideo onOffice={() => setVideoPopup({ open: true, src: 'https://player.vimeo.com/video/761022704?autoplay=1&muted=1' })} />
-            <CareerAcademy />
             <Clients />
           </>
         )}

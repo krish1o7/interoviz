@@ -30,28 +30,28 @@ export default function Cursor() {
     rafId.current = requestAnimationFrame(animate);
     window.addEventListener('mousemove', onMove);
 
-    // Large on hoverable elements
-    const growTargets = document.querySelectorAll('a, button, .service-card, .project-card');
-
-    const grow = () => cursor.classList.add('cursor--large');
-    const shrink = () => cursor.classList.remove('cursor--large');
-
-    const addListeners = () => {
-      document.querySelectorAll('a, button, .service-card, .project-card').forEach(el => {
-        el.addEventListener('mouseenter', grow);
-        el.addEventListener('mouseleave', shrink);
-      });
+    // Event delegation for interactive hover states
+    const onMouseOver = (e) => {
+      const isInteractive = Boolean(
+        e.target &&
+        e.target.closest &&
+        e.target.closest(
+          'a, button, [role="button"], .btn, .service-card, .project-card, .interoviz-gallery-card, .menu-link, .works-filter-btn, .about-hero__nav-link, .navbar__logo, input, textarea, select'
+        )
+      );
+      if (isInteractive) {
+        cursor.classList.add('cursor--large');
+      } else {
+        cursor.classList.remove('cursor--large');
+      }
     };
 
-    addListeners();
+    window.addEventListener('mouseover', onMouseOver, { passive: true });
 
     return () => {
       cancelAnimationFrame(rafId.current);
       window.removeEventListener('mousemove', onMove);
-      document.querySelectorAll('a, button, .service-card, .project-card').forEach(el => {
-        el.removeEventListener('mouseenter', grow);
-        el.removeEventListener('mouseleave', shrink);
-      });
+      window.removeEventListener('mouseover', onMouseOver);
     };
   }, []);
 

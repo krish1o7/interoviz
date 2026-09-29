@@ -48,25 +48,14 @@ export default function Hero({ onShowreel }) {
         }}
       />
 
-      {/* Gradient overlay for text readability */}
+      {/* Scrim overlay for text readability without washing out video */}
       <div className="hero__gradient" style={{ zIndex: 1 }} />
-
-      {/* Subtle vignette */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          zIndex: 1,
-          background: 'radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.55) 100%)',
-          pointerEvents: 'none',
-        }}
-      />
 
       {/* ── Content ── */}
       <div className="hero__content" style={{ zIndex: 2 }}>
         <div ref={titleRef}>
           <h1 className="hero__title">
-            {['Elevating', 'great ideas'].map((line, i) => (
+            {['Defining Tomorrow', ''].map((line, i) => (
               <span key={i} className="hero__title-line">
                 <span
                   className="hero__title-inner"

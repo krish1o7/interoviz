@@ -12,9 +12,11 @@
   --color-bg: #0a0a0a;
   --color-bg-light: #111111;
   --color-white: #ffffff;
-  --color-off-white: #f5f5f0;
-  --color-accent: #c8b89a;
-  --color-gray: #888;
+  --color-accent: #b95746;
+  --color-accent-hover: #a04737;
+  --color-accent-subtle: rgba(185, 87, 70, 0.16);
+  --color-accent-glow: rgba(185, 87, 70, 0.38);
+
   --color-dark-gray: #333;
   --font-display: 'Playfair Display', serif;
   --font-heading: 'Syne', sans-serif;
@@ -167,27 +169,47 @@ img, video {
   transform-origin: bottom;
 }
 
-/* ── Navbar ────────────────────────────────────────────── */
+/* ── Transparent Top Navbar ────────────────────────────── */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
+  width: 100%;
   z-index: 1000;
-  padding: 0.5rem clamp(1.5rem, 5vw, 5rem);
+  padding: 0.35rem clamp(1.5rem, 5vw, 5rem);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: background 0.4s ease, padding 0.4s ease;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  transition: background 0.35s ease, border-color 0.35s ease, padding 0.35s ease;
   mix-blend-mode: normal;
 }
 
 .navbar.filled {
-  background: rgba(10, 10, 10, 0.95);
-  backdrop-filter: blur(10px);
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.navbar.menu-open {
+  background: transparent !important;
+  border-bottom: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.35rem 1.25rem;
+  }
 }
 
 .navbar__logo {
@@ -400,8 +422,8 @@ img, video {
 }
 
 .navbar__hamburger.open {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.4);
+  background: transparent;
+  border-color: transparent;
 }
 
 .navbar__hamburger.open span:nth-child(1) {
@@ -429,6 +451,8 @@ img, video {
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.5s ease, visibility 0.5s ease;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .fullscreen-menu.open {
@@ -469,38 +493,115 @@ img, video {
   transition: color 0.3s ease;
 }
 
-.menu-link:hover span { color: var(--color-accent); }
+.menu-link.active span,
+.menu-link:hover span {
+  color: var(--color-accent);
+}
+
 
 .fullscreen-menu__info {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.8rem;
   justify-content: flex-end;
-  padding-top: 2rem;
+  padding-top: 1.5rem;
 }
 
 .menu-info-block {
-  border-top: 1px solid rgba(255,255,255,0.1);
-  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 1.25rem;
 }
 
 .menu-info-block__title {
   font-family: var(--font-heading);
   font-weight: 600;
   font-size: 0.85rem;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  margin-bottom: 0.5rem;
-  opacity: 0.5;
+  margin-bottom: 0.65rem;
+  opacity: 0.6;
+  color: var(--color-white);
 }
+
+.menu-info-block__emails {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: clamp(1.2rem, 3vw, 2.5rem);
+}
+
 
 .menu-info-block__email {
-  font-size: 1rem;
+  font-size: 1.05rem;
   opacity: 0.85;
-  transition: opacity 0.3s;
+  transition: opacity 0.3s ease, color 0.3s ease;
+  color: var(--color-white);
+  text-decoration: none;
 }
 
-.menu-info-block__email:hover { opacity: 1; }
+.menu-info-block__email:hover {
+  opacity: 1;
+  color: var(--color-accent, #ffffff);
+  text-decoration: underline;
+}
+
+/* ── Menu CTA Block (READY TO DISCUSS YOUR NEXT PROJECT?) ── */
+.menu-cta {
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  padding-top: 1.75rem;
+  margin-top: 0.5rem;
+}
+
+.menu-cta__title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+  line-height: 1.25;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  opacity: 1;
+  margin-bottom: 0.75rem;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+}
+
+.menu-cta__desc {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.6;
+  margin-bottom: 1.6rem;
+  max-width: 480px;
+}
+
+/* ── Enlarged Highlighted CTA Button ─────────────────────── */
+.btn--large {
+  padding: 1rem 2.25rem;
+  border: 1.5px solid var(--color-accent);
+  background: var(--color-accent-subtle);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.btn--large:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 6px 24px var(--color-accent-glow);
+}
+
+
+.btn--large .btn__text {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.btn--large .btn__arrow svg {
+  width: 18px;
+  height: 14px;
+}
+
+
+
 
 /* ── Hero ──────────────────────────────────────────────── */
 .hero {
@@ -523,8 +624,14 @@ img, video {
   min-height: 100%;
   object-fit: cover;
   object-position: center;
-  transform: translate(-50%, -50%) scale(1.38);
+  transform: translate3d(-50%, -50%, 0) scale(1.04);
   transform-origin: center center;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  filter: contrast(1.04) brightness(1.02) saturate(1.03);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform;
   pointer-events: none;
   z-index: 0;
 }
@@ -533,11 +640,10 @@ img, video {
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.25) 0%,
-    rgba(0, 0, 0, 0.0) 35%,
-    rgba(0, 0, 0, 0.25) 70%,
-    rgba(10, 10, 10, 0.85) 100%
+    to top,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.25) 25%,
+    rgba(0, 0, 0, 0.0) 50%
   );
   z-index: 1;
   pointer-events: none;
@@ -598,14 +704,18 @@ img, video {
   content: '';
   position: absolute;
   inset: 0;
-  background: var(--color-white);
+  background: var(--color-accent);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform var(--transition-medium);
 }
 
 .btn:hover::before { transform: scaleX(1); }
-.btn:hover { color: var(--color-bg); }
+.btn:hover {
+  border-color: var(--color-accent);
+  color: #ffffff;
+  box-shadow: 0 4px 18px var(--color-accent-glow);
+}
 
 .btn__text {
   font-family: var(--font-heading);
@@ -1764,12 +1874,14 @@ img, video {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255,255,255,0.2);
-  transition: border-color 0.3s, background 0.3s;
+  background: transparent;
+  border: none;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .video-popup__close:hover {
-  background: rgba(255,255,255,0.1);
+  background: transparent;
+  transform: scale(1.1);
 }
 
 .video-popup__close svg {
@@ -1803,19 +1915,26 @@ img, video {
   position: fixed;
   width: 10px;
   height: 10px;
-  background: var(--color-white);
+  background: var(--color-accent);
   border-radius: 50%;
   pointer-events: none;
   z-index: 99999;
   transform: translate(-50%, -50%);
-  transition: width 0.3s, height 0.3s, background 0.3s, opacity 0.3s;
-  mix-blend-mode: difference;
+  transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+              height 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+              background 0.3s ease,
+              border 0.3s ease,
+              box-shadow 0.3s ease;
+  box-shadow: 0 0 10px var(--color-accent-glow);
 }
 
 .cursor--large {
-  width: 50px;
-  height: 50px;
-  background: rgba(255,255,255,0.3);
+  width: 52px;
+  height: 52px;
+  background: var(--color-accent-subtle);
+  border: 1.5px solid var(--color-accent);
+  box-shadow: 0 0 20px var(--color-accent-glow);
+  backdrop-filter: blur(2px);
 }
 
 @media (hover: none) {
@@ -1890,10 +2009,12 @@ img, video {
 
   .fullscreen-menu__inner {
     grid-template-columns: 1fr;
+    gap: 2.5rem;
   }
 
   .fullscreen-menu__info {
-    display: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2rem;
   }
 
   .stats-row {
@@ -3763,7 +3884,7 @@ img, video {
   left: 0;
   right: 0;
   height: 2px;
-  background: #d4a34b;
+  background: var(--color-accent);
 }
 
 /* ── 3-Column Luxury Grid ─────────────────────────────────── */
@@ -4160,7 +4281,7 @@ img, video {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #d4a34b;
+  color: var(--color-accent);
 }
 
 .interoviz-card-overlay__title {
@@ -4241,7 +4362,7 @@ img, video {
 .works-lightbox__brand-tag {
   font-size: 0.72rem;
   font-weight: 700;
-  color: #d4a34b;
+  color: var(--color-accent);
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -4285,9 +4406,9 @@ img, video {
 }
 
 .lightbox-btn.is-active {
-  background: #d4a34b;
-  color: #000;
-  border-color: #d4a34b;
+  background: var(--color-accent);
+  color: #ffffff;
+  border-color: var(--color-accent);
   font-weight: 700;
 }
 
@@ -4351,7 +4472,7 @@ img, video {
   width: 32px;
   height: 32px;
   border: 2px solid rgba(255, 255, 255, 0.15);
-  border-top-color: #d4a34b;
+  border-top-color: var(--color-accent);
   border-radius: 50%;
   animation: spin3d 0.8s linear infinite;
 }

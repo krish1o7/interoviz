@@ -113,15 +113,38 @@ export default function ChairConfiguratorStudio({
     }
   }, [selectedStain, selectedFabric]);
 
+  // Attach DOM 'load' event listener to model-viewer custom element
+  useEffect(() => {
+    const viewer = viewerRef.current;
+    if (!viewer) return;
+
+    const handleLoad = () => {
+      setIsLoaded(true);
+      applyColors();
+    };
+
+    const handleError = (e) => {
+      console.error("model-viewer failed to load model:", e);
+    };
+
+    viewer.addEventListener("load", handleLoad);
+    viewer.addEventListener("error", handleError);
+
+    // If model is already loaded
+    if (viewer.model) {
+      handleLoad();
+    }
+
+    return () => {
+      viewer.removeEventListener("load", handleLoad);
+      viewer.removeEventListener("error", handleError);
+    };
+  }, [applyColors]);
+
   // When model finishes loading or colors change
   useEffect(() => {
     applyColors();
   }, [applyColors, isLoaded]);
-
-  const handleModelLoad = () => {
-    setIsLoaded(true);
-    applyColors();
-  };
 
   const handleWoodChange = (species) => {
     setSelectedWood(species);
@@ -182,9 +205,8 @@ export default function ChairConfiguratorStudio({
                 shadow-intensity="1.5"
                 shadow-softness="0.85"
                 environment-image={lighting}
-                exposure="1.08"
+                loading="eager"
                 className="chair-studio__model-viewer"
-                onLoad={handleModelLoad}
               >
                 <div slot="poster" className="chair-studio__loader">
                   <div className="card-3d-spinner" />

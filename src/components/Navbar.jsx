@@ -1,16 +1,21 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 
-import logoCompact from '../images/Group 129-1.svg';
 import logoExpanded from '../images/Group 128-1 (2).svg';
 
-const NAV_LINKS = ['Home', 'Works', 'Services', 'About Us', 'Academy', 'Contact'];
+const NAV_LINKS = ['Home', 'Works', 'Services', 'About Us', 'Contact'];
 
 const MENU_INFO = [
-  { title: 'General questions', email: 'info@interoviz.com' },
-  { title: 'Join the team', email: 'jobs@interoviz.com' },
-  { title: 'Press inquiries', email: 'press@interoviz.com' },
+  {
+    title: 'General Questions and Enquiries',
+    emails: ['Akshay@Interoviz.com', 'Kapil@Interoviz.com'],
+  },
+  {
+    title: 'Become Part of the Studio',
+    emails: ['Studio@Interoviz.com'],
+  },
 ];
+
 
 export default function Navbar({ onNavigate, currentPath = '/' }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -82,26 +87,43 @@ export default function Navbar({ onNavigate, currentPath = '/' }) {
           </nav>
 
           <div className="fullscreen-menu__info">
-            {MENU_INFO.map(({ title, email }) => (
+            {MENU_INFO.map(({ title, emails }) => (
               <div key={title} className="menu-info-block">
                 <div className="menu-info-block__title">{title}</div>
-                <a href={`mailto:${email}`} className="menu-info-block__email">{email}</a>
+                <div className="menu-info-block__emails">
+                  {emails.map((email) => (
+                    <a
+                      key={email}
+                      href={`mailto:${email}`}
+                      className="menu-info-block__email"
+                    >
+                      {email}
+                    </a>
+                  ))}
+                </div>
               </div>
             ))}
 
-            <div className="menu-info-block" style={{ marginTop: '1rem' }}>
-              <div className="menu-info-block__title">Ready to discuss your next project?</div>
-              <p style={{ fontSize: '0.9rem', opacity: 0.65, marginBottom: '1.5rem', lineHeight: 1.6 }}>
+            <div className="menu-cta">
+              <h3 className="menu-cta__title">READY TO DISCUSS YOUR NEXT PROJECT?</h3>
+              <p className="menu-cta__desc">
                 Fill out the brief form below and we will get back to you shortly to discuss how we can best support your vision.
               </p>
-              <AnimatedButton label="Fill Form" />
+              <AnimatedButton
+                label="Fill Form"
+                size="large"
+                onClick={() => {
+                  setMenuOpen(false);
+                  onNavigate?.('/contact');
+                }}
+              />
             </div>
           </div>
         </div>
       </div>
 
       {/* Navbar bar */}
-      <header className={`navbar${filled ? ' filled' : ''}`}>
+      <header className={`navbar${filled ? ' filled' : ''}${menuOpen ? ' menu-open' : ''}`}>
         <a
           className="navbar__logo"
           href="/"
@@ -158,9 +180,10 @@ export default function Navbar({ onNavigate, currentPath = '/' }) {
 }
 
 // ── Reusable animated button ────────────────────────────────
-export function AnimatedButton({ label, onClick, variant = 'primary' }) {
+export function AnimatedButton({ label, onClick, variant = 'primary', size = 'normal', className = '' }) {
+  const isLarge = size === 'large' || variant === 'large';
   return (
-    <button className="btn" onClick={onClick}>
+    <button className={`btn${isLarge ? ' btn--large' : ''} ${className}`.trim()} onClick={onClick}>
       <span className="btn__text">
         <span>{label}</span>
       </span>
@@ -172,3 +195,4 @@ export function AnimatedButton({ label, onClick, variant = 'primary' }) {
     </button>
   );
 }
+

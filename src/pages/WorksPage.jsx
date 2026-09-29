@@ -308,6 +308,7 @@ export default function WorksPage({ lenisRef }) {
                   shadow-softness="0.8"
                   environment-image={modalLighting}
                   exposure="1.08"
+                  loading="eager"
                   className="works-lightbox__model-viewer"
                 >
                   <div slot="poster" className="works-lightbox__loader">
