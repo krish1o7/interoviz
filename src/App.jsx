@@ -8,13 +8,14 @@ import Hero from './components/Hero';
 import WhatSetsUsApart from './components/WhatSetsUsApart';
 import WhatWeDo from './components/WhatWeDo';
 import CaseStudies from './components/CaseStudies';
-import AboutSection from './components/AboutSection';
 import Clients from './components/Clients';
 import Footer from './components/Footer';
 import Cursor from './components/Cursor';
 import VideoPopup from './components/VideoPopup';
 import AboutPage from './pages/AboutPage';
 import WorksPage from './pages/WorksPage';
+import LogoSampleLab from './pages/LogoSampleLab';
+import FormPreviewPage from './pages/FormPreviewPage';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,6 +23,8 @@ const normalizePath = (path) => {
   const p = path.toLowerCase().replace(/\/$/, '');
   if (p === '/about') return '/about';
   if (p === '/works') return '/works';
+  if (p === '/logo-sample' || p === '/logo-samples' || p === '/samples') return '/logo-sample';
+  if (p === '/form-preview' || p === '/form' || p === '/contact-form') return '/form-preview';
   return '/';
 };
 
@@ -122,7 +125,11 @@ export default function App() {
 
       {/* Main content based on route */}
       <main>
-        {currentPath === '/about' ? (
+        {currentPath === '/form-preview' ? (
+          <FormPreviewPage onNavigate={navigate} />
+        ) : currentPath === '/logo-sample' ? (
+          <LogoSampleLab onNavigate={navigate} />
+        ) : currentPath === '/about' ? (
           <AboutPage lenisRef={lenisRef} />
         ) : currentPath === '/works' ? (
           <WorksPage lenisRef={lenisRef} />
@@ -130,15 +137,14 @@ export default function App() {
           <>
             <Hero onShowreel={() => setVideoPopup({ open: true, src: 'https://player.vimeo.com/video/1070264577?autoplay=1&muted=1' })} />
             <WhatSetsUsApart />
-            <WhatWeDo />
+            <WhatWeDo onNavigate={navigate} />
             <CaseStudies />
-            <AboutSection onNavigate={navigate} />
             <Clients />
           </>
         )}
       </main>
 
-      <Footer onNavigate={navigate} />
+      {currentPath !== '/logo-sample' && currentPath !== '/form-preview' && <Footer onNavigate={navigate} />}
 
       {/* Video popup */}
       <VideoPopup

@@ -46,12 +46,24 @@ export default function Cursor() {
       }
     };
 
+    const onMouseDown = () => {
+      cursor.classList.add('cursor--clicked');
+    };
+
+    const onMouseUp = () => {
+      cursor.classList.remove('cursor--clicked');
+    };
+
     window.addEventListener('mouseover', onMouseOver, { passive: true });
+    window.addEventListener('mousedown', onMouseDown);
+    window.addEventListener('mouseup', onMouseUp);
 
     return () => {
       cancelAnimationFrame(rafId.current);
       window.removeEventListener('mousemove', onMove);
       window.removeEventListener('mouseover', onMouseOver);
+      window.removeEventListener('mousedown', onMouseDown);
+      window.removeEventListener('mouseup', onMouseUp);
     };
   }, []);
 

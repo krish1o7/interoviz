@@ -6,19 +6,19 @@ gsap.registerPlugin(ScrollTrigger);
 
 const POINTS = [
   {
-    title: 'Reliable Source',
-    text: 'We take the projects extremely seriously and understand the entire project chain, including how our rendering helps our clients reach their final clientele.',
+    title: 'A Reliable Visualisation Partner',
+    text: 'We understand where the visual fits within the larger project — from design development and presentations to marketing and the final customer. Every image is created with that purpose in mind.',
   },
   {
-    title: 'Years of Expertise',
-    text: 'Our founders are the foundation of every project at Interoviz, having worked with interior designers, architects, and real estate developers for more than 15 years.',
+    title: '15+ Years of Experience',
+    text: 'Our founders have worked with interior designers, architects, furniture brands and real estate developers for more than 15 years, bringing practical industry experience to every project.',
   },
   {
-    title: 'Design Partners, Not 3D Artists',
+    title: 'Design Partners, Not Just 3D Artists',
     text: 'Having worked in the sector for many years, we assist in packaging the product for sale or design meetings. We also provide our own design contributions that we believe can help make the product better.',
   },
   {
-    title: 'Smart AI Teams & High End Infra',
+    title: 'Technology-Driven Workflow',
     text: 'Our founders, who have been in production since the beginning of their careers, have developed a core team that constantly aims to improve with each new project.',
   }
 ];
@@ -56,8 +56,8 @@ export default function WhatSetsUsApart() {
   return (
     <section className="section bottom-line" ref={sectionRef}>
       <div className="padding-global">
-        <div ref={labelRef} style={{ marginBottom: '3rem', opacity: 0 }}>
-          <div className="title-desc__label">What Sets Us Apart</div>
+        <div ref={labelRef} className="wsa__header" style={{ opacity: 0 }}>
+          <h2 className="wsa__heading">What Sets Us Apart</h2>
         </div>
 
         <div className="wsa__grid">

@@ -68,13 +68,13 @@ export default function CaseStudies() {
     <section className="section bottom-line">
       <div className="padding-global">
         {/* Header */}
-        <div className="title-desc title-desc--vertical" ref={titleRef}>
-          <div className="title-desc__label">Case Studies</div>
-          <div className="title-desc__text">
+        <div className="case-studies__header" ref={titleRef}>
+          <h2 className="case-studies__heading">Case Studies</h2>
+          <p className="case-studies__desc">
             These selected projects showcase the ideas and artistic vision that define our work.
             They represent the ideas, artistic direction, and dedication that shape our work.{' '}
-            <span style={{ opacity: 0.4 }}>Explore projects ↓</span>
-          </div>
+            <span className="case-studies__explore-hint">Explore projects ↓</span>
+          </p>
         </div>
 
         {/* Projects grid */}

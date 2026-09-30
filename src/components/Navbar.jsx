@@ -138,29 +138,25 @@ export default function Navbar({ onNavigate, currentPath = '/' }) {
           aria-label="Interoviz - Defining Tomorrow"
           style={{ cursor: 'pointer', textDecoration: 'none' }}
         >
-          <div className={`navbar__logo-unfold${logoHover ? ' is-unfolded' : ''}`}>
-            {/* Anchored "I" glyph (Transparent, matches exact geometry of Group 129-1) */}
-            <div className="navbar__logo-i-glyph" aria-hidden="true">
-              <svg viewBox="0 0 94 288" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <div className={`navbar__logo-lockup${logoHover ? ' is-unfolded' : ''}`}>
+            {/* Stationary Anchored "IV" Monogram (Group 129-1) */}
+            <div className="navbar__logo-iv" aria-hidden="true">
+              <svg viewBox="0 0 506 288" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M353.588 288H246.07L97.0815 0H204.599L353.588 288Z" fill="white" />
+                <path d="M332.469 288H353.586L505.299 0H484.181L332.469 288Z" fill="white" />
                 <path d="M93.7148 101.06V287.969H0V0H93.3475L0 101.06H93.7148Z" fill="white" />
               </svg>
             </div>
 
-            {/* Drifting "V" glyph (Drifts to the right to unfold into the whole logo) */}
-            <div className="navbar__logo-v-glyph" aria-hidden="true">
-              <svg viewBox="97 0 409 288" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M353.588 288H246.07L97.0815 0H204.599L353.588 288Z" fill="white" />
-                <path d="M332.469 288H353.586L505.299 0H484.181L332.469 288Z" fill="white" />
-              </svg>
-            </div>
-
-            {/* Full unfolded logo (Revealed as the V drifts across) */}
-            <div className="navbar__logo-curtain">
-              <img
-                src={logoExpanded}
-                alt="Interoviz - Defining Tomorrow"
-                className="navbar__logo-full-img"
-              />
+            {/* Telescopic Architectural Drawer (Slides out smoothly from behind IV) */}
+            <div className="navbar__logo-drawer">
+              <div className="navbar__logo-drawer-inner">
+                <img
+                  src={logoExpanded}
+                  alt="Interoviz - Defining Tomorrow"
+                  className="navbar__logo-brand-img"
+                />
+              </div>
             </div>
           </div>
         </a>

@@ -1,3 +1,5 @@
+import FooterContactForm from './FooterContactForm';
+
 const FOOTER_LINKS = {
   Services: ['Architecture', 'Real Estate', 'Product & Brand', 'Media & Entertainment', 'Software Solution'],
   Company: ['About Us', 'Our Team', 'Awards', 'Newsroom', 'Art of Brick'],
@@ -7,6 +9,9 @@ const FOOTER_LINKS = {
 export default function Footer({ onNavigate }) {
   return (
     <footer className="footer">
+      {/* Project Inquiry Contact Form */}
+      <FooterContactForm titleVariant="accent" onNavigate={onNavigate} />
+
       <div className="footer__top">
         {/* Services */}
         <div className="footer__col">
